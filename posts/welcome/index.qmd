@@ -1,0 +1,15 @@
+---
+title: "Welcome To My Blog"
+author: "Sharon"
+date: "2025-01-25"
+categories: [news]
+---
+
+This is my first post in a Quarto blog. 
+
+The world is my oyster.
+
+Next stop: the moon.
+
+![](DMLwZCcWy25RhSYoszqsjN.jpg)
+

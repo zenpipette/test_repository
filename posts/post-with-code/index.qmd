@@ -1,0 +1,127 @@
+---
+title: "BCB 520 Assignment"
+author: "Sharon"
+format: html
+---
+
+# My Dataset
+
+Herein lies a BCB 520 assignment, where I describe some lovely fecal microbiome data.
+
+I have chosen an infant fecal microbiome relative abundance dataset. This data contains the top 30 most abundant bacterial genera, from 21 infants, averaged over 9 collection timepoints. The read counts are expressed as a percentage of the total read counts (relative abundance). The name of this file is IF_top30.rds.
+
+I have also included Infant_Fecal_Relabund.rds which is the less processed version of IF_top30.rds. It has not been averaged across timpepoint, or selected for the top 30. 
+
+# Background
+
+The samples represented here are a subset of samples from a larger study, where milk, maternal oral, maternal fecal, infant oral, and infant fecal samples were collected and sequenced. The microbiomes were characterized by sequencing the V1-V3 regions of the 16S ribosomal RNA gene.
+
+Dietary data was also collected, and milk fatty acids were qualitatively assessed using GC-FID.
+
+At least 3 papers have been published by the McGuire/Williams laboratory on this dataset, nicknamed "The Gates data" because it was funded by the Bill and Melinda Gates Foundation.
+
+The infant fecal microbiome is already publicly available on the Sequence Read Archive (SRA) so it has been selected for this assignment.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+# Libraries
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(readr)
+library(Hmisc)
+library(corrplot)
+```
+
+# Import and view .rds files
+
+## A smaller dataset
+
+This is a simple 21 row by 30 row data table. The participants (A003, A005...) are the row names. Each column contains the relative abundance (%) of each of the top 30 bacterial genera. Note that each value is actually the average of up to 9 timepoints, so each value represents the average relative abundance of the genera between day 2 and 6 month after birth.
+
+Load the data set.
+
+```{r}
+IF_top30 <- readRDS("C:/Users/sharo/Desktop/BCB 520/Assignments/IF_top30.rds")
+```
+
+View a subset of the data.
+
+```{r}
+IF_top30[,1:4]
+```
+
+## A larger dataset
+
+Just for fun, here is a more "uncut" version of the same data table. Note that there are 186 rows because there is a data point for each time point for each participant, and there are 406 columns of data representing bacterial genera with non-zero reads.
+
+(Note that this table has also been processed to exclude non-zero reads).
+
+```{r}
+Infant_Fecal_Relabund <- readRDS("C:/Users/sharo/Desktop/BCB 520/Assignments/Infant_Fecal_Relabund.rds")
+```
+
+Data set dimensions
+```{r}
+dim(Infant_Fecal_Relabund)
+```
+
+View a subset of the data.
+
+```{r}
+Infant_Fecal_Relabund[1:30,1:4]
+```
+
+# Describe the data
+
+This is tabular data. While I only have one dimension here, it could be considered multi-dimensional since I have several other datasets for these mother-infant dyads.
+
+I have one category here- infant fecal. Other categories I have are infant oral, maternal fecal, maternal oral, and milk.
+
+There is a time component, which could be considered ordered or sequential.
+
+The unique key is the row name, which is participant in the smaller data set and a participant_time combo in the larger data set. In the largest data sets of all, we have a sampletype_participant_timepoint combo.
+
+The columns (attributes) are read count relative abundance expressed as a percentage of the total read counts per row. These are the quantitative data type.
+
+
+# Correlations
+
+The genera read counts are non-parametric, therefore the spearman-rank correlation was used to assess possible correlations between each set of read counts.
+
+## Create correlation matrix
+
+```{r}
+IF_IF_rcorr <- rcorr(as.matrix(IF_top30), type=c("spearman"))
+```
+
+## Correlation plot 1 - square matrix, no p values, 30x30
+
+```{r}
+corrplot(IF_IF_rcorr$r, method=c("circle"), tl.cex=0.5, order="AOE")
+mtext("Infant Fecal Microbiome Correlation with AOE Cluster (6 mo avg)", line =3)
+```
+
+
+## Correlation plot 2 - lower triangle only, with p values starred, 30x30
+
+```{r}
+corrplot(IF_IF_rcorr$r, p.mat=IF_IF_rcorr$P, sig.level=c(0.01,0.05, 0.1), 
+         insig='label_sig', pch.col='black', pch.cex=0.7,
+         method=c("circle"), tl.cex=0.5, order="AOE", type="lower", diag = F)
+mtext("Infant Fecal Microbiome Correlation with AOE Cluster (6 mo avg)", line =3)
+```
+
+## Correlation plot 3 - lower triangle only, with p values starred, 20x20
+
+```{r}
+corrplot(IF_IF_rcorr$r[1:20,1:20], p.mat=IF_IF_rcorr$P[1:20, 1:20], sig.level=c(0.01,0.05, 0.1), 
+         insig='label_sig', pch.col='black', pch.cex=0.9,
+         method=c("circle"), tl.cex=0.5, order="AOE", type="lower", diag = F)
+mtext("Infant Fecal Microbiome Correlation with AOE Cluster (6 mo avg)", line =3)
+```
+
+

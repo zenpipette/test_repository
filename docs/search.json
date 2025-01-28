@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is my first post in a Quarto blog.\nThe world is my oyster.\nNext stop: the moon."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "BCB520Portfolio",
+    "section": "",
+    "text": "BCB 520 Assignment\n\n\n\n\n\n\n\n\n\n\n\nSharon\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 25, 2025\n\n\nSharon\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "about",
+    "section": "",
+    "text": "I am interested in bioinformatics. I also like long walks on the beach."
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "BCB 520 Assignment",
+    "section": "",
+    "text": "Herein lies a BCB 520 assignment, where I describe some lovely fecal microbiome data.\nI have chosen an infant fecal microbiome relative abundance dataset. This data contains the top 30 most abundant bacterial genera, from 21 infants, averaged over 9 collection timepoints. The read counts are expressed as a percentage of the total read counts (relative abundance). The name of this file is IF_top30.rds.\nI have also included Infant_Fecal_Relabund.rds which is the less processed version of IF_top30.rds. It has not been averaged across timpepoint, or selected for the top 30."
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#a-smaller-dataset",
+    "href": "posts/post-with-code/index.html#a-smaller-dataset",
+    "title": "BCB 520 Assignment",
+    "section": "A smaller dataset",
+    "text": "A smaller dataset\nThis is a simple 21 row by 30 row data table. The participants (A003, A005…) are the row names. Each column contains the relative abundance (%) of each of the top 30 bacterial genera. Note that each value is actually the average of up to 9 timepoints, so each value represents the average relative abundance of the genera between day 2 and 6 month after birth.\nLoad the data set.\n\nIF_top30 &lt;- readRDS(\"C:/Users/sharo/Desktop/BCB 520/Assignments/IF_top30.rds\")\n\nView a subset of the data.\n\nIF_top30[,1:4]\n\n     Bacteroides Escherichia.Shigella Veillonella Clostridium.sensu.stricto\nA003  0.23493134         24.673454640   6.6693137               8.296923750\nA005  4.02761085         20.209190530  11.1726579               6.019777140\nA007  0.19334102          4.074305556  24.9752758               0.659688178\nA009  0.02770472         57.396699533   0.1416980              11.107959633\nA011  9.26831811          4.852269800  18.2515791               0.052937900\nA013  0.25171539         14.938690870  25.1883604               2.902620620\nA015 40.65170057         13.094583838   2.0534671               0.152828987\nA017 29.87910938          4.391378011   5.1910630               0.307567033\nA019 44.56634097          7.588655580   5.0236797               0.106448550\nA021 40.75502674          1.106360367   4.9050189               3.952965600\nA025 34.51478583          1.733203256   3.5605401               0.000000000\nA027  1.02156002          6.573109900  28.7444037              24.638294267\nA029 44.22892401         23.098446878   2.1665187               0.090762833\nA031  0.05744295         62.947694350   3.3153721              26.952580000\nA033 38.51864961         12.478839610   6.6155465               7.548103950\nA035 34.68255444          6.776953956   1.5039755              32.013236233\nA037 14.03453994         18.774367287  10.5120452              24.897731312\nA039  0.11653624         47.718616850  17.9059235               2.086916700\nA041 21.72538480          9.548148850   0.5365920              10.075460910\nA043  8.18592391          0.006921912   4.7780929              17.086879375\nA045 64.73004397          8.060339722   0.2979979               0.002079567"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#a-larger-dataset",
+    "href": "posts/post-with-code/index.html#a-larger-dataset",
+    "title": "BCB 520 Assignment",
+    "section": "A larger dataset",
+    "text": "A larger dataset\nJust for fun, here is a more “uncut” version of the same data table. Note that there are 186 rows because there is a data point for each time point for each participant, and there are 406 columns of data representing bacterial genera with non-zero reads.\n(Note that this table has also been processed to exclude non-zero reads).\n\nInfant_Fecal_Relabund &lt;- readRDS(\"C:/Users/sharo/Desktop/BCB 520/Assignments/Infant_Fecal_Relabund.rds\")\n\nData set dimensions\n\ndim(Infant_Fecal_Relabund)\n\n[1] 186 406\n\n\nView a subset of the data.\n\nInfant_Fecal_Relabund[1:30,1:4]\n\n         Unclassified Abiotrophia Acetanaerobacterium Acetivibrio\nA003_180     9.749444           0           0.0000000           0\nA003_2      10.076098           0           0.0091700           0\nA003_10      5.317788           0           0.0000000           0\nA003_120     1.054935           0           0.0000000           0\nA003_150     3.518440           0           0.0000000           0\nA003_30      3.289348           0           0.0000000           0\nA003_5       3.287554           0           0.0000000           0\nA003_60      6.110080           0           0.0000000           0\nA003_90      2.089608           0           0.0000000           0\nA003_Mec     4.497608           0           0.0000000           0\nA005_10      3.211669           0           0.0000000           0\nA005_120     1.230697           0           0.0000000           0\nA005_150     7.330550           0           0.0000000           0\nA005_180     2.949062           0           0.0000000           0\nA005_2       2.898207           0           0.0000000           0\nA005_30      8.671352           0           0.0000000           0\nA005_5       3.936611           0           0.0000000           0\nA005_60      7.455959           0           0.0000000           0\nA005_90      3.532036           0           0.0000000           0\nA005_Mec     6.088191           0           0.0083500           0\nA007_10      2.055499           0           0.0000000           0\nA007_120     9.346856           0           0.0000000           0\nA007_150    13.934606           0           0.0000000           0\nA007_180     8.489646           0           0.0000000           0\nA007_2       4.497867           0           0.0775494           0\nA007_30     10.863575           0           0.0000000           0\nA007_5       4.407339           0           0.0000000           0\nA007_60      4.272310           0           0.0000000           0\nA007_90      7.544436           0           0.0000000           0\nA009_10      6.217265           0           0.0000000           0"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#create-correlation-matrix",
+    "href": "posts/post-with-code/index.html#create-correlation-matrix",
+    "title": "BCB 520 Assignment",
+    "section": "Create correlation matrix",
+    "text": "Create correlation matrix\n\nIF_IF_rcorr &lt;- rcorr(as.matrix(IF_top30), type=c(\"spearman\"))"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#correlation-plot-1---square-matrix-no-p-values-30x30",
+    "href": "posts/post-with-code/index.html#correlation-plot-1---square-matrix-no-p-values-30x30",
+    "title": "BCB 520 Assignment",
+    "section": "Correlation plot 1 - square matrix, no p values, 30x30",
+    "text": "Correlation plot 1 - square matrix, no p values, 30x30\n\ncorrplot(IF_IF_rcorr$r, method=c(\"circle\"), tl.cex=0.5, order=\"AOE\")\nmtext(\"Infant Fecal Microbiome Correlation with AOE Cluster (6 mo avg)\", line =3)"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#correlation-plot-2---lower-triangle-only-with-p-values-starred-30x30",
+    "href": "posts/post-with-code/index.html#correlation-plot-2---lower-triangle-only-with-p-values-starred-30x30",
+    "title": "BCB 520 Assignment",
+    "section": "Correlation plot 2 - lower triangle only, with p values starred, 30x30",
+    "text": "Correlation plot 2 - lower triangle only, with p values starred, 30x30\n\ncorrplot(IF_IF_rcorr$r, p.mat=IF_IF_rcorr$P, sig.level=c(0.01,0.05, 0.1), \n         insig='label_sig', pch.col='black', pch.cex=0.7,\n         method=c(\"circle\"), tl.cex=0.5, order=\"AOE\", type=\"lower\", diag = F)\nmtext(\"Infant Fecal Microbiome Correlation with AOE Cluster (6 mo avg)\", line =3)"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#correlation-plot-3---lower-triangle-only-with-p-values-starred-20x20",
+    "href": "posts/post-with-code/index.html#correlation-plot-3---lower-triangle-only-with-p-values-starred-20x20",
+    "title": "BCB 520 Assignment",
+    "section": "Correlation plot 3 - lower triangle only, with p values starred, 20x20",
+    "text": "Correlation plot 3 - lower triangle only, with p values starred, 20x20\n\ncorrplot(IF_IF_rcorr$r[1:20,1:20], p.mat=IF_IF_rcorr$P[1:20, 1:20], sig.level=c(0.01,0.05, 0.1), \n         insig='label_sig', pch.col='black', pch.cex=0.9,\n         method=c(\"circle\"), tl.cex=0.5, order=\"AOE\", type=\"lower\", diag = F)\nmtext(\"Infant Fecal Microbiome Correlation with AOE Cluster (6 mo avg)\", line =3)"
+  }
+]
